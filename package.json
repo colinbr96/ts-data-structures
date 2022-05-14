@@ -1,0 +1,17 @@
+{
+  "name": "ts-data-structures",
+  "version": "0.1.0",
+  "description": "Basic data structures implemented in TypeScript",
+  "main": "index.js",
+  "repository": "git@github.com:colinbr96/ts-data-structures.git",
+  "author": "Colin Brown <kolivbrauv@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "prettier": "^2.6.2",
+    "typescript": "^4.6.4"
+  }
+}
