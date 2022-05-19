@@ -36,7 +36,7 @@ export class LinkedList {
 
   /**
    * Removes the first node that matches the given value
-   * @returns Whether the value was found
+   * @returns Whether the node was found and removed
    */
   removeFirstOccurrence(val: any): boolean {
     if (!this.head) {

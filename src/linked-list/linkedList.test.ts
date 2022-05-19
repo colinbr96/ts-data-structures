@@ -35,4 +35,36 @@ describe("Linked List", () => {
       expect(list.toArray()).toEqual([1, 2, 3]);
     });
   });
+
+  describe("removeFirstOccurrence", () => {
+    it("returns false for empty list", () => {
+      const list = new LinkedList();
+      expect(list.removeFirstOccurrence(1)).toBe(false);
+      expect(list.toArray()).toEqual([]);
+    });
+
+    it("removes head node", () => {
+      const list = LinkedList.fromArray([1, 2, 3]);
+      expect(list.removeFirstOccurrence(1)).toBe(true);
+      expect(list.toArray()).toEqual([2, 3]);
+    });
+
+    it("removes node in the middle of the list", () => {
+      const list = LinkedList.fromArray([1, 2, 3]);
+      expect(list.removeFirstOccurrence(2)).toBe(true);
+      expect(list.toArray()).toEqual([1, 3]);
+    });
+
+    it("removes tail node", () => {
+      const list = LinkedList.fromArray([1, 2, 3]);
+      expect(list.removeFirstOccurrence(3)).toBe(true);
+      expect(list.toArray()).toEqual([1, 2]);
+    });
+
+    it("returns false with no match", () => {
+      const list = LinkedList.fromArray([1, 2, 3]);
+      expect(list.removeFirstOccurrence(4)).toBe(false);
+      expect(list.toArray()).toEqual([1, 2, 3]);
+    });
+  });
 });
