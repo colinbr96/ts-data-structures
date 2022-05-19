@@ -21,11 +21,5 @@
   "engines": {
     "node": ">=14",
     "yarn": ">=1.22"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "transform": {
-      "^.+\\.ts$": "ts-jest"
-    }
   }
 }
