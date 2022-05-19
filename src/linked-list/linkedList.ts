@@ -24,6 +24,16 @@ export class LinkedList {
     return new LinkedList(curr);
   }
 
+  toArray() {
+    const arr = [];
+    let curr = this.head;
+    while (curr) {
+      arr.push(curr.val);
+      curr = curr.next;
+    }
+    return arr;
+  }
+
   /**
    * Removes the first node that matches the given value
    * @returns Whether the value was found
