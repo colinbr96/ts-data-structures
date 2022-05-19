@@ -66,5 +66,17 @@ describe("Linked List", () => {
       expect(list.removeFirstOccurrence(4)).toBe(false);
       expect(list.toArray()).toEqual([1, 2, 3]);
     });
+
+    it("only removes first occurrence", () => {
+      const list = LinkedList.fromArray([1, 1, 1]);
+      expect(list.removeFirstOccurrence(1)).toBe(true);
+      expect(list.toArray()).toEqual([1, 1]);
+    });
+
+    it("handles undefined as search value", () => {
+      const list = LinkedList.fromArray([]);
+      expect(list.removeFirstOccurrence(undefined)).toBe(false);
+      expect(list.toArray()).toEqual([]);
+    });
   });
 });

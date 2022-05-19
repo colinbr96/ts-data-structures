@@ -39,22 +39,19 @@ export class LinkedList {
    * @returns Whether the node was found and removed
    */
   removeFirstOccurrence(val: any): boolean {
-    if (!this.head) {
-      return false;
-    }
-    if (this.head && this.head.val === val) {
-      this.head = this.head.next;
+    let curr = this.head;
+    if (curr && curr.val === val) {
+      this.head = curr?.next || null;
       return true;
     }
-    let curr = this.head;
-    while (curr.next && curr.next.val !== val) {
+    while (curr?.next) {
+      if (curr.next.val === val) {
+        curr.next = curr.next.next;
+        return true;
+      }
       curr = curr.next;
     }
-    if (!curr.next) {
-      return false;
-    }
-    curr.next = curr.next?.next || null;
-    return true;
+    return false;
   }
 
   toString() {
