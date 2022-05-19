@@ -1,4 +1,4 @@
-class ListNode {
+export class ListNode {
   val: any = null;
   next: ListNode | null = null;
 
@@ -8,22 +8,20 @@ class ListNode {
   }
 }
 
-class LinkedList {
-  head: ListNode | null = null;
+export class LinkedList {
+  head: ListNode | null;
 
   constructor(head: ListNode | null = null) {
     this.head = head;
   }
 
   static fromArray(arr: any[]) {
-    const linkedList = new LinkedList();
     let curr: ListNode | null = null;
     for (let i = arr.length - 1; i >= 0; i--) {
       const temp: ListNode = new ListNode(arr[i], curr);
       curr = temp;
     }
-    linkedList.head = curr;
-    return linkedList;
+    return new LinkedList(curr);
   }
 
   /**
