@@ -41,7 +41,7 @@ export class LinkedList {
   removeFirstOccurrence(val: any): boolean {
     let curr = this.head;
     if (curr && curr.val === val) {
-      this.head = curr?.next || null;
+      this.head = curr.next || null;
       return true;
     }
     while (curr?.next) {

@@ -36,10 +36,30 @@ describe("Linked List", () => {
     });
   });
 
+  describe("toString", () => {
+    it('returns "null" for empty list', () => {
+      expect(new LinkedList().toString()).toBe("null");
+    });
+
+    it("returns diagram for 1 item list", () => {
+      expect(LinkedList.fromArray([1]).toString()).toBe("1 -> null");
+    });
+
+    it("returns diagram for 3 item list", () => {
+      expect(LinkedList.fromArray([1, 2, 3]).toString()).toBe("1 -> 2 -> 3 -> null");
+    });
+  });
+
   describe("removeFirstOccurrence", () => {
     it("returns false for empty list", () => {
       const list = new LinkedList();
       expect(list.removeFirstOccurrence(1)).toBe(false);
+      expect(list.toArray()).toEqual([]);
+    });
+
+    it("removes single node", () => {
+      const list = new LinkedList(new ListNode(1));
+      expect(list.removeFirstOccurrence(1)).toBe(true);
       expect(list.toArray()).toEqual([]);
     });
 
