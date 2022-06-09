@@ -33,14 +33,13 @@ export class Graph<T> {
 
     while (!queue.isEmpty()) {
       const next = queue.dequeue();
-      if (seen.has(next)) {
-        continue;
-      }
-      seen.add(next);
       onVisit(next);
 
       for (const adjacentNode of next.adjacentNodes) {
-        queue.enqueue(adjacentNode);
+        if (!seen.has(adjacentNode)) {
+          seen.add(adjacentNode);
+          queue.enqueue(adjacentNode);
+        }
       }
     }
   }
