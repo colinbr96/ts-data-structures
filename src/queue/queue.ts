@@ -1,18 +1,18 @@
-export class QueueNode {
-  val: any = null;
-  next: QueueNode | null = null;
+export class QueueNode<T> {
+  val: T;
+  next: QueueNode<T> | null;
 
-  constructor(val: any, next: QueueNode | null = null) {
+  constructor(val: T, next: QueueNode<T> | null = null) {
     this.val = val;
     this.next = next;
   }
 }
 
-export class Queue {
-  front: QueueNode | null;
-  back: QueueNode | null;
+export class Queue<T> {
+  front: QueueNode<T> | null;
+  back: QueueNode<T> | null;
 
-  constructor(front: QueueNode | null = null) {
+  constructor(front: QueueNode<T> | null = null) {
     this.front = front;
     this.back = this.front;
 
@@ -21,9 +21,9 @@ export class Queue {
     }
   }
 
-  static fromArray(arr: any[]) {
+  static fromArray<T>(arr: T[]) {
     if (!arr.length) {
-      return new Queue();
+      return new Queue<T>();
     }
     let curr = null;
     for (let i = arr.length - 1; i >= 0; i--) {
@@ -36,7 +36,7 @@ export class Queue {
 
   toArray() {
     let arr = [];
-    let curr: QueueNode | null = this.front;
+    let curr: QueueNode<T> | null = this.front;
     while (curr) {
       arr.push(curr.val);
       curr = curr.next;
@@ -46,7 +46,7 @@ export class Queue {
 
   toString() {
     let s = "";
-    let curr: QueueNode | null = this.front;
+    let curr: QueueNode<T> | null = this.front;
     while (curr) {
       s += `${curr.val} -> `;
       curr = curr.next;
@@ -55,7 +55,7 @@ export class Queue {
     return s;
   }
 
-  enqueue(val: any) {
+  enqueue(val: T) {
     const node = new QueueNode(val);
     if (!this.front) {
       this.front = node;
