@@ -20,6 +20,24 @@ describe("Graph", () => {
       const graph = new Graph();
       expect(graph.nodes).toEqual([]);
     });
+
+    it("constructs from an adjacency list", () => {
+      const graph = Graph.fromAdjacencyList({
+        a: ["b", "e", "f"],
+        b: ["d", "e"],
+        c: ["b"],
+        d: ["c", "e"],
+        e: [],
+        f: [],
+      });
+      expect(graph.nodes.map((node) => node.val)).toEqual(["a", "b", "c", "d", "e", "f"]);
+      expect(graph.nodes[0].adjacentNodes.map((node) => node.val)).toEqual(["b", "e", "f"]);
+      expect(graph.nodes[1].adjacentNodes.map((node) => node.val)).toEqual(["d", "e"]);
+      expect(graph.nodes[2].adjacentNodes.map((node) => node.val)).toEqual(["b"]);
+      expect(graph.nodes[3].adjacentNodes.map((node) => node.val)).toEqual(["c", "e"]);
+      expect(graph.nodes[4].adjacentNodes).toEqual([]);
+      expect(graph.nodes[5].adjacentNodes).toEqual([]);
+    });
   });
 
   describe("Depth First Search", () => {

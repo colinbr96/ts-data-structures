@@ -17,6 +17,18 @@ export class Graph<T> {
     this.nodes = nodes;
   }
 
+  static fromAdjacencyList(adjacencyList: { [key: string]: string[] }): Graph<string> {
+    const nodes = new Map<string, GraphNode<string>>();
+    for (const [key, adjacentKeys] of Object.entries(adjacencyList)) {
+      const node = new GraphNode(key);
+      nodes.set(key, node);
+      for (const adjacentKey of adjacentKeys) {
+        node.adjacentNodes.push(nodes.get(adjacentKey) || new GraphNode(adjacentKey));
+      }
+    }
+    return new Graph(Array.from(nodes.values()));
+  }
+
   depthFirstSearch(onVisit: (node: GraphNode<T>) => void, startingNode?: GraphNode<T>): void {
     if (!startingNode && this.nodes.length === 0) {
       return;
