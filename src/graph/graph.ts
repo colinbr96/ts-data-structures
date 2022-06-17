@@ -1,5 +1,15 @@
 import { Queue } from "../queue/queue";
 
+export class GraphNode<T> {
+  val: T;
+  adjacentNodes: GraphNode<T>[];
+
+  constructor(val: T, adjacentNodes: GraphNode<T>[] = []) {
+    this.val = val;
+    this.adjacentNodes = adjacentNodes;
+  }
+}
+
 export class Graph<T> {
   nodes: GraphNode<T>[];
 
@@ -7,7 +17,7 @@ export class Graph<T> {
     this.nodes = nodes;
   }
 
-  depthFirstSearch(onVisit: (node: GraphNode<T>) => void, startingNode?: GraphNode<T>) {
+  depthFirstSearch(onVisit: (node: GraphNode<T>) => void, startingNode?: GraphNode<T>): void {
     if (!startingNode && this.nodes.length === 0) {
       return;
     }
@@ -24,7 +34,7 @@ export class Graph<T> {
     dfs(startingNode || this.nodes[0]);
   }
 
-  breadthFirstSearch(onVisit: (node: GraphNode<T>) => void, startingNode?: GraphNode<T>) {
+  breadthFirstSearch(onVisit: (node: GraphNode<T>) => void, startingNode?: GraphNode<T>): void {
     if (!startingNode && this.nodes.length === 0) {
       return;
     }
@@ -42,15 +52,5 @@ export class Graph<T> {
         }
       }
     }
-  }
-}
-
-export class GraphNode<T> {
-  val: T;
-  adjacentNodes: GraphNode<T>[];
-
-  constructor(val: T, adjacentNodes: GraphNode<T>[] = []) {
-    this.val = val;
-    this.adjacentNodes = adjacentNodes;
   }
 }

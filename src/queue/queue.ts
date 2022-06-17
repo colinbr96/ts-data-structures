@@ -21,7 +21,7 @@ export class Queue<T> {
     }
   }
 
-  static fromArray<T>(arr: T[]) {
+  static fromArray<T>(arr: T[]): Queue<T> {
     if (!arr.length) {
       return new Queue<T>();
     }
@@ -34,7 +34,7 @@ export class Queue<T> {
     return new Queue(curr);
   }
 
-  toArray() {
+  toArray(): T[] {
     let arr = [];
     let curr: QueueNode<T> | null = this.front;
     while (curr) {
@@ -44,7 +44,7 @@ export class Queue<T> {
     return arr;
   }
 
-  toString() {
+  toString(): string {
     let s = "";
     let curr: QueueNode<T> | null = this.front;
     while (curr) {
@@ -55,7 +55,7 @@ export class Queue<T> {
     return s;
   }
 
-  enqueue(val: T) {
+  enqueue(val: T): void {
     const node = new QueueNode(val);
     if (!this.front) {
       this.front = node;
@@ -65,7 +65,7 @@ export class Queue<T> {
     this.back = node;
   }
 
-  dequeue() {
+  dequeue(): T {
     if (!this.front) {
       throw Error("Can't dequeue an empty Queue");
     }
@@ -78,7 +78,7 @@ export class Queue<T> {
     return temp;
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return !this.front;
   }
 }
