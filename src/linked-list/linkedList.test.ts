@@ -94,7 +94,7 @@ describe("Linked List", () => {
     });
 
     it("handles undefined as search value", () => {
-      const list = LinkedList.fromArray([]);
+      const list: LinkedList<undefined> = new LinkedList();
       expect(list.removeFirstOccurrence(undefined)).toBe(false);
       expect(list.toArray()).toEqual([]);
     });

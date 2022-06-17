@@ -1,31 +1,31 @@
-export class ListNode {
-  val: any = null;
-  next: ListNode | null = null;
+export class ListNode<T> {
+  val: T;
+  next: ListNode<T> | null;
 
-  constructor(val: any, next: ListNode | null = null) {
+  constructor(val: T, next: ListNode<T> | null = null) {
     this.val = val;
     this.next = next;
   }
 }
 
-export class LinkedList {
-  head: ListNode | null;
+export class LinkedList<T> {
+  head: ListNode<T> | null;
 
-  constructor(head: ListNode | null = null) {
+  constructor(head: ListNode<T> | null = null) {
     this.head = head;
   }
 
-  static fromArray(arr: any[]) {
-    let curr: ListNode | null = null;
+  static fromArray<T>(arr: T[]): LinkedList<T> {
+    let curr: ListNode<T> | null = null;
     for (let i = arr.length - 1; i >= 0; i--) {
-      const temp: ListNode = new ListNode(arr[i], curr);
+      const temp: ListNode<T> = new ListNode(arr[i], curr);
       curr = temp;
     }
     return new LinkedList(curr);
   }
 
-  toArray() {
-    const arr = [];
+  toArray(): T[] {
+    const arr: T[] = [];
     let curr = this.head;
     while (curr) {
       arr.push(curr.val);
@@ -38,7 +38,7 @@ export class LinkedList {
    * Removes the first node that matches the given value
    * @returns Whether the node was found and removed
    */
-  removeFirstOccurrence(val: any): boolean {
+  removeFirstOccurrence(val: T): boolean {
     let curr = this.head;
     if (curr && curr.val === val) {
       this.head = curr.next || null;
@@ -54,7 +54,7 @@ export class LinkedList {
     return false;
   }
 
-  toString() {
+  toString(): string {
     let s = "";
     let curr = this.head;
     while (curr) {
