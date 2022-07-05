@@ -31,3 +31,27 @@ export function mergeSort<T>(arr: T[]): T[] {
 
   return merge(mergeSort(left), mergeSort(right));
 }
+
+export function iterativeMergeSort<T>(arr: T[]): T[] {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  let working: T[][] = [];
+  for (const el of arr) {
+    working.push([el]);
+  }
+
+  while (working.length > 1) {
+    const newWorking: T[][] = [];
+    for (let i = 0; i < working.length; i += 2) {
+      if (i + 2 > working.length) {
+        newWorking.push(working[i]);
+        break;
+      }
+      newWorking.push(merge(working[i], working[i + 1]));
+    }
+    working = newWorking;
+  }
+  return working[0];
+}
