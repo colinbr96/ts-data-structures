@@ -10,6 +10,9 @@ export class GraphNode<T> {
   }
 }
 
+/**
+ * Directed, unweighted graph
+ */
 export class Graph<T> {
   nodes: GraphNode<T>[];
 
