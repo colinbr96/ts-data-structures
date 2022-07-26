@@ -14,12 +14,10 @@ describe("Array", () => {
       expect(mergeSort([8, 4, 6, 9, 1, 2, 5, 3, 10, 7])).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     });
 
-    it("sorts 1000 items", () => {
-      const unsorted: number[] = [];
-      for (let i = 0; i < 1000; i++) {
-        unsorted.push(Math.floor(Math.random() * 1000));
-      }
-      expect(mergeSort(unsorted)).toEqual(unsorted.sort((a, b) => a - b));
+    it("sorts non-sequential items", () => {
+      expect(mergeSort([12, 78, 56, 5, 75, 74, 69, 55, 26, 71])).toEqual([
+        5, 12, 26, 55, 56, 69, 71, 74, 75, 78,
+      ]);
     });
 
     it("sorts duplicate items", () => {
@@ -42,12 +40,10 @@ describe("Array", () => {
       ]);
     });
 
-    it("sorts 1000 items", () => {
-      const unsorted: number[] = [];
-      for (let i = 0; i < 1000; i++) {
-        unsorted.push(Math.floor(Math.random() * 1000));
-      }
-      expect(iterativeMergeSort(unsorted)).toEqual(unsorted.sort((a, b) => a - b));
+    it("sorts non-sequential items", () => {
+      expect(iterativeMergeSort([12, 78, 56, 5, 75, 74, 69, 55, 26, 71])).toEqual([
+        5, 12, 26, 55, 56, 69, 71, 74, 75, 78,
+      ]);
     });
 
     it("sorts duplicate items", () => {
