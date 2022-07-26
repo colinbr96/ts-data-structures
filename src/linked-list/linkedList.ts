@@ -54,6 +54,21 @@ export class LinkedList<T> {
     return false;
   }
 
+  reverse() {
+    if (!this.head || !this.head.next) return;
+
+    let prev: ListNode<T> | null = null;
+    let curr: ListNode<T> | null = this.head;
+
+    while (curr) {
+      const next: ListNode<T> | null = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+    this.head = prev;
+  }
+
   toString(): string {
     let s = "";
     let curr = this.head;

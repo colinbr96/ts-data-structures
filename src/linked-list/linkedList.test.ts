@@ -99,4 +99,24 @@ describe("Linked List", () => {
       expect(list.toArray()).toEqual([]);
     });
   });
+
+  describe("reverse", () => {
+    it("does nothing to empty list", () => {
+      const list = new LinkedList();
+      list.reverse();
+      expect(list.head).toBe(null);
+    });
+
+    it("reverses a single node", () => {
+      const list = new LinkedList(new ListNode(1));
+      list.reverse();
+      expect(list.toArray()).toEqual([1]);
+    });
+
+    it("reverses a long list", () => {
+      const list = LinkedList.fromArray([1, 2, 3, 4, 5, 6]);
+      list.reverse();
+      expect(list.toArray()).toEqual([6, 5, 4, 3, 2, 1]);
+    });
+  });
 });
