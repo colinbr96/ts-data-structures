@@ -1,12 +1,13 @@
 # ts-data-structures
 
-Basic data structures implemented in TypeScript. Unit tests written in Jest.
+Basic data structures & algorithms implemented in TypeScript. Unit tests written in Jest.
 
 ### List of implemented data structures / algorithms
 
 - Array
   - Merge Sort (Recursive)
   - Merge Sort (Iterative)
+  - Binary Search
 - Graph (Directed, Unweighted)
   - Depth First Search (Iterative)
   - Breadth First Search (Iterative)
@@ -16,6 +17,7 @@ Basic data structures implemented in TypeScript. Unit tests written in Jest.
   - Heapify
 - Linked List
   - Remove First Occurrence
+  - Reverse
 - Queue
   - Enqueue
   - Dequeue
