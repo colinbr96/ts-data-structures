@@ -1,4 +1,4 @@
-import { Queue } from "../queue/queue";
+import { Queue, QueueNode } from "../queue/queue";
 
 export class GraphNode<T> {
   val: T;
@@ -53,7 +53,7 @@ export class Graph<T> {
     if (!startingNode && this.nodes.length === 0) {
       return;
     }
-    const queue: Queue<GraphNode<T>> = Queue.fromArray([startingNode || this.nodes[0]]);
+    const queue = new Queue(new QueueNode(startingNode || this.nodes[0]));
     const seen: Set<GraphNode<T>> = new Set();
 
     while (!queue.isEmpty()) {
