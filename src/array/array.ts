@@ -1,25 +1,3 @@
-function merge<T>(arr1: T[], arr2: T[]): T[] {
-  let result = [];
-  let i = 0;
-  let j = 0;
-
-  while (i < arr1.length && j < arr2.length) {
-    if (arr1[i] <= arr2[j]) {
-      result.push(arr1[i]);
-      i++;
-    } else {
-      result.push(arr2[j]);
-      j++;
-    }
-  }
-  if (i < arr1.length) {
-    result = result.concat(arr1.slice(i));
-  } else if (j < arr2.length) {
-    result = result.concat(arr2.slice(j));
-  }
-  return result;
-}
-
 export function mergeSort<T>(arr: T[]): T[] {
   if (arr.length <= 1) {
     return arr;
@@ -54,4 +32,53 @@ export function iterativeMergeSort<T>(arr: T[]): T[] {
     working = newWorking;
   }
   return working[0];
+}
+
+function merge<T>(arr1: T[], arr2: T[]): T[] {
+  let result = [];
+  let i = 0;
+  let j = 0;
+
+  while (i < arr1.length && j < arr2.length) {
+    if (arr1[i] <= arr2[j]) {
+      result.push(arr1[i]);
+      i++;
+    } else {
+      result.push(arr2[j]);
+      j++;
+    }
+  }
+  if (i < arr1.length) {
+    result = result.concat(arr1.slice(i));
+  } else if (j < arr2.length) {
+    result = result.concat(arr2.slice(j));
+  }
+  return result;
+}
+
+/**
+ * Searches a sorted array of n elements in O(log n) time
+ * @param arr Array of sorted elements
+ * @param target Element to find within arr
+ * @returns Index of target, or -1 if not found
+ */
+export function binarySearch<T>(arr: T[], target: T): number {
+  if (!arr || !arr.length || target === undefined) {
+    return -1;
+  }
+
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left < right) {
+    const middle = Math.floor(left + (right - left) / 2);
+    if (target < arr[middle]) {
+      right = middle - 1;
+    } else if (target > arr[middle]) {
+      left = middle + 1;
+    } else {
+      return middle;
+    }
+  }
+  return arr[left] === target ? left : -1;
 }
