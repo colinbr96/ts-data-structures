@@ -13,18 +13,25 @@ export class Heap {
       this.comparator = (a, b) => a < b;
     }
 
-    this.heapify(arr);
+    for (const num of arr) {
+      this.push(num);
+    }
   }
 
   peek(): number | null {
-    return this.heap[0] || null;
+    return this.heap[0] ?? null;
   }
 
   get size(): number {
     return this.heap.length;
   }
 
-  extract() {
+  push(num: number) {
+    this.heap.push(num);
+    this.siftUp();
+  }
+
+  pop(): number {
     // Swap root with last node
     const temp = this.heap[this.heap.length - 1];
     this.heap[this.heap.length - 1] = this.heap[0];
@@ -35,21 +42,12 @@ export class Heap {
     return result;
   }
 
-  extractTopN(n: number) {
+  popMultiple(count: number) {
     const topN = [];
-    for (let i = 0; i < n; i++) {
-      topN.push(this.extract());
+    for (let i = 0; i < count; i++) {
+      topN.push(this.pop());
     }
     return topN;
-  }
-
-  private heapify(arr: number[]): number[] {
-    this.heap = [];
-    for (const el of arr) {
-      this.heap.push(el);
-      this.siftUp();
-    }
-    return this.heap;
   }
 
   private siftUp() {
