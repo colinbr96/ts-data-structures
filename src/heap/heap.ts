@@ -1,7 +1,3 @@
-const parentOf = (i: number) => Math.floor((i - 1) / 2);
-const leftChildOf = (i: number) => 2 * i + 1;
-const rightChildOf = (i: number) => 2 * i + 2;
-
 export class Heap {
   heap: number[] = [];
   private comparator: (a: number, b: number) => boolean;
@@ -17,6 +13,10 @@ export class Heap {
       this.push(num);
     }
   }
+
+  private static parentOf = (i: number) => Math.floor((i - 1) / 2);
+  private static leftChildOf = (i: number) => 2 * i + 1;
+  private static rightChildOf = (i: number) => 2 * i + 2;
 
   peek(): number | null {
     return this.heap[0] ?? null;
@@ -55,8 +55,8 @@ export class Heap {
 
   private siftUp() {
     let i = this.heap.length - 1;
-    while (i > 0 && this.comparator(this.heap[i], this.heap[parentOf(i)])) {
-      const parent = parentOf(i);
+    while (i > 0 && this.comparator(this.heap[i], this.heap[Heap.parentOf(i)])) {
+      const parent = Heap.parentOf(i);
 
       // Swap
       const temp = this.heap[parent];
@@ -69,15 +69,17 @@ export class Heap {
   private siftDown() {
     let i = 0;
     while (
-      (leftChildOf(i) < this.size && this.comparator(this.heap[leftChildOf(i)], this.heap[i])) ||
-      (rightChildOf(i) < this.size && this.comparator(this.heap[rightChildOf(i)], this.heap[i]))
+      (Heap.leftChildOf(i) < this.size &&
+        this.comparator(this.heap[Heap.leftChildOf(i)], this.heap[i])) ||
+      (Heap.rightChildOf(i) < this.size &&
+        this.comparator(this.heap[Heap.rightChildOf(i)], this.heap[i]))
     ) {
-      let childToSwap = leftChildOf(i);
+      let childToSwap = Heap.leftChildOf(i);
       if (
-        rightChildOf(i) < this.size &&
-        this.comparator(this.heap[rightChildOf(i)], this.heap[leftChildOf(i)])
+        Heap.rightChildOf(i) < this.size &&
+        this.comparator(this.heap[Heap.rightChildOf(i)], this.heap[Heap.leftChildOf(i)])
       ) {
-        childToSwap = rightChildOf(i);
+        childToSwap = Heap.rightChildOf(i);
       }
 
       // Swap
