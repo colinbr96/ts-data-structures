@@ -2,7 +2,7 @@ export class Heap {
   heap: number[] = [];
   private comparator: (a: number, b: number) => boolean;
 
-  constructor(arr: number[], isMaxHeap = false) {
+  constructor(arr: number[] = [], isMaxHeap = false) {
     if (isMaxHeap) {
       this.comparator = (a, b) => a > b;
     } else {

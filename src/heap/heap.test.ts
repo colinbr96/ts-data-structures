@@ -44,7 +44,7 @@ describe("Heap", () => {
   });
 
   it("can't pop an empty heap", () => {
-    const heap = new Heap([]);
+    const heap = new Heap();
     expect(heap.pop).toThrow();
   });
 });
