@@ -42,4 +42,9 @@ describe("Heap", () => {
     expect(heap.size).toBe(11);
     expect(heap.peek()).toBe(0);
   });
+
+  it("can't pop an empty heap", () => {
+    const heap = new Heap([]);
+    expect(heap.pop).toThrow();
+  });
 });

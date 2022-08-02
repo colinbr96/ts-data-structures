@@ -32,12 +32,15 @@ export class Heap {
   }
 
   pop(): number {
+    if (!this.size) {
+      throw Error("Can't pop an empty Heap");
+    }
     // Swap root with last node
     const temp = this.heap[this.heap.length - 1];
     this.heap[this.heap.length - 1] = this.heap[0];
     this.heap[0] = temp;
 
-    const result = this.heap.pop();
+    const result = this.heap.pop() as number;
     this.siftDown();
     return result;
   }
