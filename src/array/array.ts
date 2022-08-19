@@ -104,7 +104,7 @@ export function binaryInsert<T>(sortedArr: T[], val: T): void {
     } else if (val < sortedArr[middle]) {
       right = middle - 1;
     } else {
-      break;
+      left = right = middle;
     }
   }
 

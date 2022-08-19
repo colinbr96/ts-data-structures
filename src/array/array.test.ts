@@ -105,5 +105,11 @@ describe("Array", () => {
       binaryInsert(arr, 11);
       expect(arr).toEqual([1, 3, 5, 7, 9, 11]);
     });
+
+    it("inserts an existing value exactly in the middle", () => {
+      const arr = [1, 3, 5, 6, 7, 9, 11];
+      binaryInsert(arr, 6);
+      expect(arr).toEqual([1, 3, 5, 6, 6, 7, 9, 11]);
+    });
   });
 });
