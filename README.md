@@ -22,3 +22,17 @@ Basic data structures & algorithms implemented in TypeScript. Unit tests written
 - Queue
   - Enqueue
   - Dequeue
+
+## Developing
+
+Requirements:
+
+- Install [Node.js](https://nodejs.org/en/download/)
+- Install [yarn](https://yarnpkg.com/)
+
+Commands:
+
+- `yarn` - Installs all necessary dependencies
+- `yarn build` - Compiles the project to the `dist` folder as vanilla JS
+- `yarn test` - Runs all Jest unit tests
+- `yarn coverage` - Generates a test coverage report
