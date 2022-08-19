@@ -82,3 +82,35 @@ export function binarySearch<T>(arr: T[], target: T): number {
   }
   return arr[left] === target ? left : -1;
 }
+
+/**
+ * Inserts an element in a sorted array of n elements in O(log n) time
+ * @param sortedArr Array of sorted elements
+ * @param val Element to insert within arr
+ */
+export function binaryInsert<T>(sortedArr: T[], val: T): void {
+  if (!sortedArr.length) {
+    sortedArr.push(val);
+    return;
+  }
+
+  let left = 0;
+  let right = sortedArr.length - 1;
+
+  while (left < right) {
+    const middle = Math.floor(left + (right - left) / 2);
+    if (val > sortedArr[middle]) {
+      left = middle + 1;
+    } else if (val < sortedArr[middle]) {
+      right = middle - 1;
+    } else {
+      break;
+    }
+  }
+
+  if (val < sortedArr[left]) {
+    sortedArr.splice(left, 0, val);
+  } else {
+    sortedArr.splice(left + 1, 0, val);
+  }
+}
