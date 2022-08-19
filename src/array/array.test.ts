@@ -73,16 +73,20 @@ describe("Array", () => {
     it("doesn't find a non-existent value in an even-count array", () => {
       expect(binarySearch([15, 25, 39, 42, 53, 54, 61, 72, 88, 94], 63)).toBe(-1);
     });
+
+    it("finds a value exactly in the middle", () => {
+      expect(binarySearch([10, 11, 16, 29, 32, 57, 67, 68, 85], 32)).toBe(4);
+    });
   });
 
   describe("Binary Insert", () => {
-    it("inserts to an empty array", () => {
+    it("inserts a value in an empty array", () => {
       const arr: number[] = [];
       binaryInsert(arr, 5);
       expect(arr).toEqual([5]);
     });
 
-    it("inserts in the middle", () => {
+    it("inserts a value within the array", () => {
       const arr = [1, 3, 5, 7, 9];
       binaryInsert(arr, 4);
       expect(arr).toEqual([1, 3, 4, 5, 7, 9]);
@@ -94,13 +98,13 @@ describe("Array", () => {
       expect(arr).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
 
-    it("inserts at the leftmost index", () => {
+    it("inserts a value at the leftmost index", () => {
       const arr = [1, 3, 5, 7, 9];
       binaryInsert(arr, -1);
       expect(arr).toEqual([-1, 1, 3, 5, 7, 9]);
     });
 
-    it("inserts at the rightmost index", () => {
+    it("inserts a value at the rightmost index", () => {
       const arr = [1, 3, 5, 7, 9];
       binaryInsert(arr, 11);
       expect(arr).toEqual([1, 3, 5, 7, 9, 11]);
