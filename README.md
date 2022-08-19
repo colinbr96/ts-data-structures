@@ -8,6 +8,7 @@ Basic data structures & algorithms implemented in TypeScript. Unit tests written
   - Merge Sort (Recursive)
   - Merge Sort (Iterative)
   - Binary Search
+  - Binary Insert
 - Graph (Directed, Unweighted)
   - Depth First Search (Iterative)
   - Breadth First Search (Iterative)
