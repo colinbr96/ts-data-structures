@@ -58,29 +58,29 @@ function merge<T>(arr1: T[], arr2: T[]): T[] {
 
 /**
  * Searches a sorted array of n elements in O(log n) time
- * @param arr Array of sorted elements
+ * @param sortedArr Array of sorted elements
  * @param target Element to find within arr
  * @returns Index of target, or -1 if not found
  */
-export function binarySearch<T>(arr: T[], target: T): number {
-  if (!arr || !arr.length || target === undefined) {
+export function binarySearch<T>(sortedArr: T[], target: T): number {
+  if (!sortedArr.length) {
     return -1;
   }
 
   let left = 0;
-  let right = arr.length - 1;
+  let right = sortedArr.length - 1;
 
   while (left < right) {
     const middle = Math.floor(left + (right - left) / 2);
-    if (target < arr[middle]) {
+    if (target < sortedArr[middle]) {
       right = middle - 1;
-    } else if (target > arr[middle]) {
+    } else if (target > sortedArr[middle]) {
       left = middle + 1;
     } else {
       return middle;
     }
   }
-  return arr[left] === target ? left : -1;
+  return sortedArr[left] === target ? left : -1;
 }
 
 /**
