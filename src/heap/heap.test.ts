@@ -1,4 +1,4 @@
-import { Heap } from "./heap";
+import { Heap, maxHeapComparator } from "./heap";
 
 describe("Heap", () => {
   it("can heapify a min-heap", () => {
@@ -8,7 +8,7 @@ describe("Heap", () => {
   });
 
   it("can heapify a max-heap", () => {
-    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9], true);
+    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9], maxHeapComparator);
     expect(heap.peek()).toEqual(10);
     expect(heap.heap).toEqual([10, 9, 8, 5, 7, 4, 6, 2, 1, 3]);
   });
@@ -19,13 +19,13 @@ describe("Heap", () => {
   });
 
   it("can heap-sort a max-heap", () => {
-    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9], true);
+    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9], maxHeapComparator);
     expect(heap.popMultiple(10)).toEqual([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
   });
 
   it("can peek an empty heap", () => {
     const heap = new Heap([]);
-    expect(heap.peek()).toBe(null);
+    expect(heap.peek()).toBe(undefined);
   });
 
   it("can pop", () => {
@@ -46,5 +46,27 @@ describe("Heap", () => {
   it("can't pop an empty heap", () => {
     const heap = new Heap();
     expect(heap.pop).toThrow();
+  });
+
+  it("can use generic objects as values", () => {
+    interface KeyValue {
+      key: string;
+      val: number;
+    }
+    const heap = new Heap<KeyValue>(
+      [
+        { key: "Y", val: 2 },
+        { key: "X", val: 1 },
+        { key: "Z", val: 3 },
+      ],
+      (a: KeyValue, b: KeyValue) => a.val < b.val
+    );
+
+    expect(heap.peek()).toEqual({ key: "X", val: 1 });
+    heap.push({ key: "W", val: 0 });
+    expect(heap.peek()).toEqual({ key: "W", val: 0 });
+    heap.pop();
+    heap.pop();
+    expect(heap.peek()).toEqual({ key: "Y", val: 2 });
   });
 });

@@ -1,16 +1,14 @@
-export class Heap {
-  heap: number[] = [];
-  private comparator: (a: number, b: number) => boolean;
+export const minHeapComparator = (a: number, b: number) => a < b;
+export const maxHeapComparator = (a: number, b: number) => a > b;
 
-  constructor(arr: number[] = [], isMaxHeap = false) {
-    if (isMaxHeap) {
-      this.comparator = (a, b) => a > b;
-    } else {
-      this.comparator = (a, b) => a < b;
-    }
+export class Heap<T> {
+  heap: T[] = [];
+  private comparator;
 
-    for (const num of arr) {
-      this.push(num);
+  constructor(arr: T[] = [], comparator = (a: T, b: T) => a < b) {
+    this.comparator = comparator;
+    for (const el of arr) {
+      this.push(el);
     }
   }
 
@@ -18,20 +16,20 @@ export class Heap {
   private static leftChildOf = (i: number) => 2 * i + 1;
   private static rightChildOf = (i: number) => 2 * i + 2;
 
-  peek(): number | null {
-    return this.heap[0] ?? null;
+  peek(): T | undefined {
+    return this.heap[0];
   }
 
   get size(): number {
     return this.heap.length;
   }
 
-  push(num: number) {
-    this.heap.push(num);
+  push(el: T) {
+    this.heap.push(el);
     this.siftUp();
   }
 
-  pop(): number {
+  pop(): T {
     if (!this.size) {
       throw Error("Can't pop an empty Heap");
     }
@@ -40,7 +38,7 @@ export class Heap {
     this.heap[this.heap.length - 1] = this.heap[0];
     this.heap[0] = temp;
 
-    const result = this.heap.pop() as number;
+    const result = this.heap.pop() as T;
     this.siftDown();
     return result;
   }
