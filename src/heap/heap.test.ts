@@ -59,13 +59,14 @@ describe("Heap", () => {
       key: string;
       val: number;
     }
+    const comparator = (a: KeyValue, b: KeyValue) => a.val < b.val;
     const heap = new Heap<KeyValue>(
       [
         { key: "Y", val: 2 },
         { key: "X", val: 1 },
         { key: "Z", val: 3 },
       ],
-      (a: KeyValue, b: KeyValue) => a.val < b.val
+      comparator as any
     );
 
     expect(heap.peek()).toEqual({ key: "X", val: 1 });
