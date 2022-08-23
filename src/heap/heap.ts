@@ -12,7 +12,7 @@ export class Heap<T> {
     }
   }
 
-  private static parentOf = (i: number) => Math.floor((i - 1) / 2);
+  private static parentOf = (i: number) => (i - 1) >>> 1;
   private static leftChildOf = (i: number) => 2 * i + 1;
   private static rightChildOf = (i: number) => 2 * i + 2;
 
@@ -66,18 +66,21 @@ export class Heap<T> {
 
   private siftDown() {
     let i = 0;
-    while (
-      (Heap.leftChildOf(i) < this.size &&
-        this.comparator(this.heap[Heap.leftChildOf(i)], this.heap[i])) ||
-      (Heap.rightChildOf(i) < this.size &&
-        this.comparator(this.heap[Heap.rightChildOf(i)], this.heap[i]))
-    ) {
+    const half = this.size >>> 1;
+
+    while (i < half) {
       let childToSwap = Heap.leftChildOf(i);
+      const rightChild = childToSwap + 1;
+
       if (
-        Heap.rightChildOf(i) < this.size &&
-        this.comparator(this.heap[Heap.rightChildOf(i)], this.heap[Heap.leftChildOf(i)])
+        rightChild < this.size &&
+        this.comparator(this.heap[rightChild], this.heap[childToSwap])
       ) {
-        childToSwap = Heap.rightChildOf(i);
+        childToSwap = rightChild;
+      }
+
+      if (this.comparator(this.heap[i], this.heap[childToSwap])) {
+        break;
       }
 
       // Swap
