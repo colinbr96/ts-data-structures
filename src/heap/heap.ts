@@ -7,9 +7,8 @@ export class Heap<T> {
 
   constructor(arr: T[] = [], comparator = (a: T, b: T) => a < b) {
     this.comparator = comparator;
-    for (const el of arr) {
-      this.push(el);
-    }
+    this.heap = arr.slice();
+    this.heapify();
   }
 
   private static parentOf = (i: number) => (i - 1) >>> 1;
@@ -22,6 +21,13 @@ export class Heap<T> {
 
   get size(): number {
     return this.heap.length;
+  }
+
+  heapify() {
+    const firstParentNode = (this.size >>> 1) - 1;
+    for (let i = firstParentNode; i >= 0; i--) {
+      this.siftDown(i);
+    }
   }
 
   push(el: T) {
@@ -51,8 +57,7 @@ export class Heap<T> {
     return topN;
   }
 
-  private siftUp() {
-    let i = this.heap.length - 1;
+  private siftUp(i = this.heap.length - 1) {
     while (i > 0 && this.comparator(this.heap[i], this.heap[Heap.parentOf(i)])) {
       const parent = Heap.parentOf(i);
 
@@ -64,8 +69,7 @@ export class Heap<T> {
     }
   }
 
-  private siftDown() {
-    let i = 0;
+  private siftDown(i = 0) {
     const half = this.size >>> 1;
 
     while (i < half) {

@@ -10,7 +10,13 @@ describe("Heap", () => {
   it("can heapify a max-heap", () => {
     const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9], maxHeapComparator);
     expect(heap.peek()).toEqual(10);
-    expect(heap.heap).toEqual([10, 9, 8, 5, 7, 4, 6, 2, 1, 3]);
+    expect(heap.heap).toEqual([10, 9, 8, 7, 6, 4, 3, 2, 1, 5]);
+  });
+
+  it("doesn't modify input array", () => {
+    const arr = [3, 5, 4, 2, 6, 10, 8, 7, 1, 9];
+    new Heap(arr);
+    expect(arr).toEqual([3, 5, 4, 2, 6, 10, 8, 7, 1, 9]);
   });
 
   it("can heap-sort a min-heap", () => {
