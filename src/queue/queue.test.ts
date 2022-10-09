@@ -1,4 +1,4 @@
-import { Queue, QueueNode } from "./queue";
+import { Queue } from "./queue";
 
 describe("Queue", () => {
   describe("Constructing", () => {
@@ -8,13 +8,11 @@ describe("Queue", () => {
       expect(queue.back).toBe(null);
     });
 
-    it("constructs with front node param", () => {
-      const queue = new Queue(new QueueNode(1, new QueueNode(2, new QueueNode(3))));
+    it("constructs with single value param", () => {
+      const queue = new Queue(1);
       expect(queue.front?.val).toBe(1);
-      expect(queue.front?.next?.val).toBe(2);
-      expect(queue.front?.next?.next?.val).toBe(3);
-      expect(queue.front?.next?.next?.next).toBe(null);
-      expect(queue.back?.val).toBe(3);
+      expect(queue.front?.next).toBe(null);
+      expect(queue.back?.val).toBe(1);
       expect(queue.back?.next).toBe(null);
     });
 
@@ -32,6 +30,14 @@ describe("Queue", () => {
       const queue = Queue.fromArray([]);
       expect(queue.front).toBe(null);
       expect(queue.back).toBe(null);
+    });
+
+    it("constructs from a 1-element array", () => {
+      const queue = Queue.fromArray([1]);
+      expect(queue.front?.val).toBe(1);
+      expect(queue.front?.next).toBe(null);
+      expect(queue.back?.val).toBe(1);
+      expect(queue.back?.next).toBe(null);
     });
   });
 
@@ -52,7 +58,7 @@ describe("Queue", () => {
       expect(new Queue().toString()).toBe("null");
     });
     it("returns diagram for 1 item queue", () => {
-      expect(Queue.fromArray([1]).toString()).toBe("1 -> null");
+      expect(new Queue(1).toString()).toBe("1 -> null");
     });
     it("returns diagram for 3 item queue", () => {
       expect(Queue.fromArray([1, 2, 3]).toString()).toBe("1 -> 2 -> 3 -> null");
@@ -69,7 +75,7 @@ describe("Queue", () => {
     });
 
     it("enqueues to a 1 item queue", () => {
-      const queue = Queue.fromArray([1]);
+      const queue = new Queue(1);
       queue.enqueue(2);
       expect(queue.toArray()).toEqual([1, 2]);
       expect(queue.front?.val).toBe(1);
@@ -91,7 +97,7 @@ describe("Queue", () => {
     });
 
     it("dequeues from a 1 item queue", () => {
-      const queue = Queue.fromArray([1]);
+      const queue = new Queue(1);
       queue.dequeue();
       expect(queue.toArray()).toEqual([]);
       expect(queue.front).toBe(null);

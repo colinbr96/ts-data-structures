@@ -1,4 +1,4 @@
-export class QueueNode<T> {
+class QueueNode<T> {
   val: T;
   next: QueueNode<T> | null;
 
@@ -9,29 +9,34 @@ export class QueueNode<T> {
 }
 
 export class Queue<T> {
-  front: QueueNode<T> | null;
-  back: QueueNode<T> | null;
+  front: QueueNode<T> | null = null;
+  back: QueueNode<T> | null = null;
 
-  constructor(front: QueueNode<T> | null = null) {
-    this.front = front;
-    this.back = this.front;
-
-    while (this.back?.next) {
-      this.back = this.back.next;
+  constructor(val?: T) {
+    if (val !== undefined) {
+      this.front = new QueueNode<T>(val);
+      this.back = this.front;
     }
   }
 
   static fromArray<T>(arr: T[]): Queue<T> {
-    if (!arr.length) {
+    if (arr.length === 0) {
       return new Queue<T>();
     }
-    let curr = null;
-    for (let i = arr.length - 1; i >= 0; i--) {
+    if (arr.length === 1) {
+      return new Queue<T>(arr[0]);
+    }
+
+    const queue = new Queue<T>(arr[arr.length - 1]);
+    let curr = queue.back;
+
+    for (let i = arr.length - 2; i >= 0; i--) {
       const node = new QueueNode(arr[i]);
       node.next = curr;
       curr = node;
     }
-    return new Queue(curr);
+    queue.front = curr;
+    return queue;
   }
 
   toArray(): T[] {
