@@ -22,6 +22,10 @@ Basic data structures & algorithms implemented in TypeScript. Unit tests written
 - Queue
   - Enqueue
   - Dequeue
+- Trie
+  - Insert
+  - Search
+  - Starts With
 
 ## Developing
 
