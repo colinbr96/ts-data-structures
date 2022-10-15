@@ -12,7 +12,7 @@ export class BinarySearchTree<T> {
   root: TreeNode<T> | null = null;
   size = 0;
 
-  search(val: T): boolean {
+  public search(val: T): boolean {
     let node = this.root;
     while (node) {
       if (val < node.val) {
@@ -32,15 +32,17 @@ export class BinarySearchTree<T> {
    * @param val
    * @returns Whether the insertion succeeded
    */
-  insert(val: T): boolean {
+  public insert(val: T): boolean {
     const newNode = new TreeNode(val);
 
+    // If tree is empty, set root to val
     if (this.root === null) {
       this.root = newNode;
       this.size++;
       return true;
     }
 
+    // Traverse the tree, looking for where to insert
     let node = this.root;
 
     while (true) {
