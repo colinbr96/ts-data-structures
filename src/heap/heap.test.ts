@@ -1,8 +1,8 @@
-import { Heap, maxHeapComparator } from "./heap";
+import { Heap, maxHeapComparator, minHeapComparator } from "./heap";
 
 describe("Heap", () => {
   it("can heapify a min-heap", () => {
-    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9]);
+    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9], minHeapComparator);
     expect(heap.peek()).toEqual(1);
     expect(heap.heap).toEqual([1, 2, 4, 3, 6, 10, 8, 7, 5, 9]);
   });
@@ -15,12 +15,12 @@ describe("Heap", () => {
 
   it("doesn't modify input array", () => {
     const arr = [3, 5, 4, 2, 6, 10, 8, 7, 1, 9];
-    new Heap(arr);
+    new Heap(arr, minHeapComparator);
     expect(arr).toEqual([3, 5, 4, 2, 6, 10, 8, 7, 1, 9]);
   });
 
   it("can heap-sort a min-heap", () => {
-    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9]);
+    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9], minHeapComparator);
     expect(heap.popMultiple(10)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   });
 
@@ -30,19 +30,19 @@ describe("Heap", () => {
   });
 
   it("can peek an empty heap", () => {
-    const heap = new Heap([]);
+    const heap = new Heap([], minHeapComparator);
     expect(heap.peek()).toBe(undefined);
   });
 
   it("can pop", () => {
-    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9]);
+    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9], minHeapComparator);
     expect(heap.size).toBe(10);
     expect(heap.pop()).toBe(1);
     expect(heap.size).toBe(9);
   });
 
   it("can push", () => {
-    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9]);
+    const heap = new Heap([3, 5, 4, 2, 6, 10, 8, 7, 1, 9], minHeapComparator);
     expect(heap.size).toBe(10);
     heap.push(0);
     expect(heap.size).toBe(11);
@@ -50,7 +50,7 @@ describe("Heap", () => {
   });
 
   it("can't pop an empty heap", () => {
-    const heap = new Heap();
+    const heap = new Heap([], minHeapComparator);
     expect(heap.pop).toThrow();
   });
 
@@ -59,14 +59,13 @@ describe("Heap", () => {
       key: string;
       val: number;
     }
-    const comparator = (a: KeyValue, b: KeyValue) => a.val < b.val;
     const heap = new Heap<KeyValue>(
       [
         { key: "Y", val: 2 },
         { key: "X", val: 1 },
         { key: "Z", val: 3 },
       ],
-      comparator as any
+      (a: KeyValue, b: KeyValue) => a.val < b.val
     );
 
     expect(heap.peek()).toEqual({ key: "X", val: 1 });

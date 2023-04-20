@@ -1,12 +1,12 @@
-export const minHeapComparator = <T>(a: T, b: T) => a < b;
-export const maxHeapComparator = <T>(a: T, b: T) => a > b;
+type Comparator<T> = (a: T, b: T) => boolean;
+
+export const minHeapComparator: Comparator<number> = (a, b) => a < b;
+export const maxHeapComparator: Comparator<number> = (a, b) => a > b;
 
 export class Heap<T> {
   heap: T[] = [];
-  private comparator;
 
-  constructor(arr: T[] = [], comparator = minHeapComparator) {
-    this.comparator = comparator;
+  constructor(arr: T[], private comparator: Comparator<T>) {
     this.heap = arr.slice();
     this.heapify();
   }
